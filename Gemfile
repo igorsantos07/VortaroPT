@@ -1,19 +1,22 @@
 source :rubygems
 
 # Server requirements (defaults to WEBrick)
-# gem 'thin'
-# gem 'mongrel'
+gem 'thin'
 
 # Project requirements
 gem 'rake'
 gem 'sinatra-flash', :require => 'sinatra/flash'
 
 # Component requirements
+gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'compass'
 gem 'haml'
-gem 'SystemTimer', :require => "system_timer"
 gem 'mongoid'
 gem 'bson_ext', :require => "mongo"
+
+# Random requirements
+gem 'awesome_print'
+gem 'term-ansicolor'
 
 # Test requirements
 
