@@ -1,11 +1,13 @@
+# -*- encoding : utf-8 -*-
 class Vortaro < Padrino::Application
   register Padrino::Rendering
   register Padrino::Mailer
   register Padrino::Helpers
   register CompassInitializer
 
-
   enable :sessions
+  layout :main
+  set :haml, :format => :html5
 
   ##
   # Caching support
@@ -59,3 +61,4 @@ class Vortaro < Padrino::Application
   #   end
   #
 end
+

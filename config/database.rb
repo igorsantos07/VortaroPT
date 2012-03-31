@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 
 # Connection.new takes host, port
 host = 'localhost'
@@ -23,3 +24,4 @@ Mongoid.database = Mongo::Connection.new(host, port).db(database_name)
 # end
 #
 # More installation and setup notes are on http://mongoid.org/docs/
+
