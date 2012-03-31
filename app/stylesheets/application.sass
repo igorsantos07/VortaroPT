@@ -1,14 +1,14 @@
 // This import applies a global reset to any page that imports this stylesheet.
-@import "blueprint/reset";
+@import "blueprint/reset"
 
 // To configure blueprint, edit the partials/base.sass file.
-@import "partials/base";
+@import "partials/base"
 
 // Import all the default blueprint modules so that we can access their mixins.
-@import "blueprint";
+@import "blueprint"
 
 // Import the non-default scaffolding module.
-@import "blueprint/scaffolding";
+@import "blueprint/scaffolding"
 
 // To generate css equivalent to the blueprint css but with your
 // configuration applied, uncomment:
@@ -17,27 +17,25 @@
 // But Compass recommends that you scope your blueprint styles
 // So that you can better control what pages use blueprint
 // when stylesheets are concatenated together.
-@include blueprint-scaffolding;
+@include blueprint-scaffolding
 
-body.bp {
-  @include blueprint-typography(true);
-  @include blueprint-utilities;
-  @include blueprint-debug;
-  @include blueprint-interaction;
+body.bp
+  @include blueprint-typography(true)
+  @include blueprint-utilities
+  @include blueprint-debug
+  @include blueprint-interaction
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
-}
 
-form.bp {
-  @include blueprint-form;
-}
+form.bp
+  @include blueprint-form
 
-.two-col {
-  @include container;
-  background-color: #cccccc;
-  #header, #footer {
-    @include column(24); }
-  #sidebar {
-    @include column(3); }
-  #content {
-    @include column(21, true); } }
+.two-col
+  @include container
+  background-color: #cccccc
+  #header, #footer
+    @include column(24)
+  #sidebar
+    @include column(3)
+  #content
+    @include column(21, true)
