@@ -13,6 +13,7 @@ gem 'compass'
 gem 'haml'
 gem 'mongoid'
 gem 'bson_ext', :require => "mongo"
+gem 'mongoid_slug'
 
 # Random requirements
 gem 'awesome_print'
