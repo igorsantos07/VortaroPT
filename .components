@@ -1,0 +1,7 @@
+--- 
+:stylesheet: compass
+:script: jquery
+:renderer: haml
+:orm: mongoid
+:mock: none
+:test: none
