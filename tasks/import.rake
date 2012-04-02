@@ -1,18 +1,66 @@
 # -*- encoding : utf-8 -*-
 namespace :import do
+  require 'open-uri'
+  require 'pp'
+
   pe = ('a'..'z').to_a << '00'
   ep = ('a'..'z').to_a << 'ch' << 'gh' << 'hh' << 'jh' << 'sh' << 'uh' << '00'
-  parts = {:pe => pe, :ep => ep}
+#  pe = ['x']
+#  ep = ['x']
+  $parts = {:pe => pe, :ep => ep}
+
+  def timer
+    $on_timer = true
+    print ' ';
+    %w(- \\ | / - \\ | / -).each {|c| print "\b#{c}"; sleep 0.5; }
+    $on_timer = false
+  end
+
+  def each_entry &proc
+    $parts.each do |part, letters|
+      letters.each do |letter|
+          human_part = case part
+            when :ep then 'EO-PT'
+            when :pe then 'PT-EO'
+          end
+
+          print "Going to #{human_part}, letter #{letter.upcase}... "
+            url = "http://vortaro.brazilo.org/vtf/dic/#{part}_#{letter}.htm"
+            page = Nokogiri::HTML(open(url)) { |c| c.noent.noblanks }
+          puts 'done'
+
+          words = page.css 'div p'
+          print "Importing ~#{(words.length/2)-1} words "
+            $on_timer = false
+            words.each do |node|
+#              timer unless $on_timer # for this to work properly, it should be detached from the main process
+              yield node
+            end
+          puts ' done'
+      end
+    end
+  end
 
   desc 'Will import all the pages, splitting data between "word" and "meaning" only'
   task :simple do
-    pp parts
+
+    words = {}
+    each_entry do |node|
+      # ignores empty and last (useless) paragraphs
+      next if node.text.strip.empty? or !node.has_attribute? 'style'
+
+      word_nodeset = node.css('b:first-child')
+      if word_nodeset[0]
+        words[word_nodeset[0].text] = (node.children - word_nodeset).text
+        print '.'
+      else
+        print '!'
+      end
+    end
   end
 
   desc 'Tries to split "word" and all complex parts of the "meaning"'
   task :complex do
-    require 'open-uri'
-
     $: << './eoparser'
     require 'Parser'
 
