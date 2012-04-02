@@ -5,7 +5,7 @@ namespace :import do
   parts = {:pe => pe, :ep => ep}
 
   desc 'Will import all the pages, splitting data between "word" and "meaning" only'
-  task :default do
+  task :simple do
     pp parts
   end
 
